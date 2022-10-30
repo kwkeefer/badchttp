@@ -12,7 +12,6 @@ def main(path):
     badchars = [f"{x}" for x in hex_chars]
 
     chars = generate_chars(badchars)
-    print(chars)
     return chars
 
 
@@ -25,16 +24,12 @@ def generate_chars(badchars: [str]) -> bytes:
     Credit https://github.com/the-c0d3r/buffer-overflow/
     """
     char_str = ""
-    print(badchars)
 
     for x in range(1, 256):
         current_char = '{:02x}'.format(x)
 
         if current_char not in badchars:
             char_str += current_char
-
-        else:
-            print(current_char)
 
     return binascii.unhexlify(char_str)
 
