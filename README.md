@@ -18,6 +18,8 @@ after the port:
 curl -o chars.txt http://localhost:5000/\x0a\x0d
 ```
 
+[demo.webm](https://user-images.githubusercontent.com/19308176/199892002-4e257ec4-17ac-43ba-999f-1c9242486352.webm)
+
 
 ### Installation Method #1: pipx (Recommended)
 

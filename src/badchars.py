@@ -12,7 +12,8 @@ def main(path):
     hex_chars = re.findall(r"x([a-fA-F0-9]{2})", path)
     badchars = [f"{x}" for x in hex_chars]
 
-    print(f"Skipping chars: {''.join(badchars)}")
+    if badchars:
+        print(f"Skipping chars: {','.join(badchars)}")
     chars = generate_chars(badchars)
     return chars
 
@@ -23,7 +24,7 @@ def generate_chars(badchars: [str]) -> bytes:
     """
     char_str = ""
 
-    for x in range(1, 256):
+    for x in range(0, 256):
         current_char = '{:02x}'.format(x)
 
         if current_char not in badchars:
