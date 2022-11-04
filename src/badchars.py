@@ -1,8 +1,9 @@
 from flask import Flask
 import binascii
 import re
+import argparse
 
-app = Flask(__name__)
+app = Flask("badchttp")
 
 
 @app.route('/', defaults={'path': ''})
@@ -11,6 +12,7 @@ def main(path):
     hex_chars = re.findall(r"x([a-fA-F0-9]{2})", path)
     badchars = [f"{x}" for x in hex_chars]
 
+    print(f"Skipping chars: {''.join(badchars)}")
     chars = generate_chars(badchars)
     return chars
 
@@ -34,5 +36,16 @@ def generate_chars(badchars: [str]) -> bytes:
     return binascii.unhexlify(char_str)
 
 
+def entrypoint():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-p", "--port", help="Port to listen on", default=5000, type=int)
+    parser.add_argument("-l", "--listen", help="IP address to listen on (default 0.0.0.0)",
+                        default="0.0.0.0")
+    parser.add_argument("--debug", help="Turns debug mode off", action="store_false")
+    args = parser.parse_args()
+
+    app.run(host=args.listen, debug=args.debug, port=args.port)
+
+
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", debug=True)
+    entrypoint()
