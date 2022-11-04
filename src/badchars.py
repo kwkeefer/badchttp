@@ -19,11 +19,7 @@ def main(path):
 
 def generate_chars(badchars: [str]) -> bytes:
     """
-    generate all chars after filtering out badchars
-    :param badchars: ["0a", "0d"]
-    :return: "0102.."
-
-    Credit https://github.com/the-c0d3r/buffer-overflow/
+    Slightly modified function from https://github.com/the-c0d3r/buffer-overflow/
     """
     char_str = ""
 
